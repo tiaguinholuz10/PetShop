@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<f:view>
+	<h:head></h:head>
+	<h:body>
+		<pe:layout fullPage="true"
+			options="#{layoutController.layoutOptionsOne}"
+			rendered="#{layoutController.layoutOneShown}"
+			state="#{layoutController.stateOne}">
+
+			
+<!-- LAYOUT LEFT - PARTE ESQUERDA DA LAYOUT -->
+			<pe:layoutPane position="west"
+				styleContent="whidth:100%; background-color:#262626 ">
+
+				<div id="cabecalho" />
+				<a href="index.xhtml"> <h:graphicImage library="images"
+						name="logo.png" height="200px" width="100%" />
+				</a>
+
+				<!-- MENU PARA NAVEGAR PELO SISTEMA -->
+				<p:growl autoUpdate="true" style="whidth:100%" />
+				<p:megaMenu>
+					<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home"
+						style="font-weight: bold;" />
+				</p:megaMenu>
+				<p:panelMenu>
+					<p:submenu label="Pet">
+						<p:menuitem value="Pet" url="pet.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Proprietario">
+						<p:menuitem value="Proprietario" url="proprietario.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Fornecedor">
+						<p:menuitem value="Fornecedor" url="fornecedor.xhtml" />
+					</p:submenu>
+				</p:panelMenu>
+
+			</pe:layoutPane>
+			<!-- END LAYOUT LEFT-->
+			
+			<!-- LAYOUT CENTER - PARTE CENTRAL DA LAYOUT  -->
+			<pe:layoutPane position="center">
+				<div id="conteudo">
+					<ui:insert name="conteudo" />
+				</div>
+			</pe:layoutPane>
+			<!-- END LAYOUT CENTER-->
+			
+			<!-- LAYOUT Bottom-South - PARTE INFERIOR DA LAYOUT  -->
+			<pe:layoutPane position="south"
+				styleContent="background-color:#262626;">
+				<div>
+					<h6 align="left"
+						style="color: white; font-size: 16px; height: 1px; width: 100%; text-align: center; margin-top: 2px; margin-bottom: 20px;">Todos
+						os direitos reservados @PetShop.</h6>
+				</div>
+			</pe:layoutPane>
+			<!-- END LAYOUT Bottom-South-->
+
+		</pe:layout>
+	</h:body>
+</f:view>
+</html>

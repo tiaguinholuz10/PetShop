@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<h:form id="form-pet">
+			<p:panel header="Cadastro Pet">
+				<p:messages id="form-message" globalOnly="true" closable="true"
+					showDetail="true" showSummary="false" />
+
+				<h:panelGrid columns="3">
+
+					<p:outputLabel value="Nome: " for="nome" />
+					<p:inputText id="nome" value="#{petBean.pet.nome}" required="true" />
+					<p:message id="msgNome" for="nome" />
+
+					<p:outputLabel value="Descrição " for="desc" />
+					<p:inputTextarea id="desc" value="#{petBean.pet.desc}" rows="2"
+						cols="30" maxlength="100" margin="auto" autoResize="true"
+						counterTemplate="{0} caracteres restantes." />
+					<p:message for="desc" />
+
+					<p:outputLabel value="Cor" for="cor" />
+					<p:selectOneMenu id="cor" value="#{petBean.pet.cor}"
+						required="true">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItem itemLabel="Amarelo" itemValue="AMARELO" />
+						<f:selectItem itemLabel="Preto" itemValue="PRETO" />
+						<f:selectItem itemLabel="Branco" itemValue="BRANCO" />
+						<f:selectItem itemLabel="Pardo" itemValue="PARDO" />
+					</p:selectOneMenu>
+					<p:message for="cor" />
+
+					<p:outputLabel value="Sexo" for="sexo" />
+					<p:selectOneRadio id="sexo" value="#{petBean.pet.sexo}">
+						<f:selectItem itemLabel="Fêmia" itemValue="FEMEA" />
+						<f:selectItem itemLabel="Macho" itemValue="MACHO" />
+					</p:selectOneRadio>
+					<p:message for="sexo" />
+
+					<p:outputLabel value="Raça: " for="raca" />
+					<p:inputText id="raca" value="#{petBean.pet.raca}" required="true" />
+					<p:message for="raca" />
+
+					<p:outputLabel value="Espécie " for="especie" />
+					<p:inputText id="especie" value="#{petBean.pet.especie}" />
+					<p:message for="especie" />
+
+					<p:outputLabel value="Prontuário" for="obs" />
+					<p:inputTextarea id="obs" value="#{petBean.pet.obs}" rows="2"
+						cols="30" counter="display" maxlength="250" margin="auto"
+						autoResize="true" counterTemplate="{0} caracteres restantes." />
+					<h:outputText id="display" />
+					<p:message for="obs" />
+				</h:panelGrid>
+
+				<br />
+
+				<p:commandButton value="Cadastrar" action="#{petBean.salvar}"
+					update="@form" />
+
+				<p:commandButton value="Cancelar" action="#{petBean.cancelar}"
+					update="@form" immediate="true" resetValues="true" />
+
+				<br />
+				<br />
+
+				<p:dataTable value="#{petBean.pets}" var="pet" paginator="true"
+					rows="5" rendered="#{not empty petBean.pets}"
+					emptyMessage="Não contém dados" rowsPerPageTemplates="5,10,50,100">
+
+					<p:column headerText="Nome" sortBy="#{pet.nome}">
+						<h:outputLabel value="#{pet.nome}" />
+					</p:column>
+
+					<p:column headerText="Cor" sortBy="#{pet.cor}">
+						<h:outputLabel value="#{pet.cor}" />
+					</p:column>
+
+					<p:column headerText="Sexo" sortBy="#{pet.sexo}">
+						<h:outputLabel value="#{pet.sexo}" />
+					</p:column>
+				</p:dataTable>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

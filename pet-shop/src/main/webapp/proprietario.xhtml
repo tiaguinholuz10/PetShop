@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:panel header="Cadastro Proprietário">
+				<p:messages globalOnly="true" showDetail="true" showSummary="false"
+					closable="true" showIcon="true" />
+
+				<div class="ui-fluid">
+					<h:panelGrid columns="6" cellpadding="4"
+						styleClass="ui-panelgrid-blank">
+
+						<p:outputLabel value="Nome:" for="nome" />
+						<p:inputText id="nome" value="#{proprietario.proprietario.nome}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="nome" />
+
+						<p:outputLabel value="CPF:" for="cpf" />
+						<p:inputMask mask="999.999.999-99" id="cpf"
+							value="#{proprietario.proprietario.cpf}" required="true"
+							requiredMessage="Campo Obrigatorio!"
+							converterMessage="Falha ao converter CPF">
+							<f:converter converterId="cpfConverter" />
+							<f:validator validatorId="cpfValidator" />
+						</p:inputMask>
+						<p:message for="cpf" />
+
+						<p:outputLabel value="Email:" for="email" />
+						<p:inputText id="email" value="#{proprietario.proprietario.email}"
+							required="true" requiredMessage="Email: *Campo Obrigatório"
+							maxlength="45">
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
+						<p:message for="email" />
+
+						<p:outputLabel for="dt_nasc" value="Data Nasc:" />
+						<p:calendar id="dt_nasc"
+							value="#{proprietario.proprietario.dt_nasc}" locale="pt_BR"
+							navigator="true" placeholder="30/12/1990" pattern="dd-MM-yyyy"
+							mask="true" showOn="button">
+						</p:calendar>
+						<p:message for="dt_nasc" />
+
+					</h:panelGrid>
+				</div>
+
+				<br />
+				<p:separator />
+				<div align="left">
+					<h:outputText value="CONTATO" />
+				</div>
+				<p:separator />
+				<br />
+
+				<div class="ui-fluid">
+					<h:panelGrid columns="3" cellpadding="4"
+						styleClass="ui-panelgrid-blank">
+
+						<p:outputLabel value="Telefone Principal:" for="phone_prin" />
+						<p:inputMask mask="(99)99999999?9" id="phone_prin"
+							value="#{proprietario.proprietario.phone_prin}" required="true"
+							requiredMessage="Telefone: *Campo Obrigatório" />
+						<p:message for="phone_prin" />
+
+						<p:outputLabel value="Telefone Opcional:" for="phone_op" />
+						<p:inputMask mask="(99)99999999?9" id="phone_op"
+							value="#{proprietario.proprietario.phone_op}" />
+						<p:message for="phone_op" />
+
+					</h:panelGrid>
+				</div>
+
+				<br />
+				<p:separator />
+				<div align="left">
+					<h:outputText value="ENDEREÇO" />
+				</div>
+				<p:separator />
+				<br />
+
+				<div class="ui-fluid">
+					<h:panelGrid columns="6" cellpadding="4"
+						styleClass="ui-panelgrid-blank">
+
+						<p:outputLabel value="Rua" for="rua" />
+						<p:inputText id="rua" value="#{proprietario.endereco.rua}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="rua" />
+
+						<p:outputLabel value="Bairro: " for="bairro" />
+						<p:inputText id="bairro" value="#{proprietario.endereco.bairro}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="bairro" />
+
+						<p:outputLabel value="Cidade: " for="cidade" />
+						<p:inputText id="cidade" value="#{proprietario.endereco.cidade}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="cidade" />
+
+						<p:outputLabel value="Cep:" for="cep" />
+						<p:inputMask mask="99999999" id="cep"
+							value="#{proprietario.endereco.cep}" required="true"
+							requiredMessage="Campo Obrigatório" />
+						<p:message for="cep" />
+
+					</h:panelGrid>
+				</div>
+
+				<br />
+				<br />
+				<br />
+
+				<div align="left">
+
+					<p:commandButton value="Salvar" action="#{proprietario.salvar}"
+						update="@form" />
+					<p:commandButton value="Cancelar" action="#{proprietario.cancelar}"
+						update="@form" immediate="true" resetValues="true" />
+
+				</div>
+
+				<br />
+				<br />
+				<p:separator />
+				<br />
+
+				<p:dataTable value="#{proprietario.proprietarios}"
+					var="proprietario"
+					rendered="#{not empty proprietario.proprietarios}">
+					<f:facet name="header">
+					Lista de Clientes
+					</f:facet>
+					<p:column style="width:16px">
+						<p:rowToggler />
+					</p:column>
+					<p:column headerText="CPF">
+						<h:outputText value="#{proprietario.cpf}">
+							<f:converter converterId="cpfConverter" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Proprietario">
+						<h:outputText value="#{proprietario.nome}" />
+					</p:column>
+
+					<p:rowExpansion>
+						<p:panelGrid columns="2" columnClasses="label,value"
+							style="width:80%">
+
+							<p:outputLabel value="Nome:" />
+							<h:outputText value="#{proprietario.nome}" />
+
+							<p:outputLabel value="CPF:" />
+							<h:outputText value="#{proprietario.cpf}">
+								<f:converter converterId="cpfConverter" />
+							</h:outputText>
+
+							<p:outputLabel value="Data Nascimento:" />
+							<h:outputText value="#{proprietario.dt_nasc}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+
+							<p:outputLabel value="Email:" />
+							<h:outputText value="#{proprietario.email}" />
+
+							<p:outputLabel value="Telefone Principal:" />
+							<h:outputText value="#{proprietario.phone_prin}" />
+
+							<p:outputLabel value="Telefone Opcional:" />
+							<h:outputText value="#{proprietario.phone_op}" />
+
+							<p:outputLabel value="Rua:" />
+							<h:outputText value="#{proprietario.endereco.rua}" />
+
+							<p:outputLabel value="Bairro:" />
+							<h:outputText value="#{proprietario.endereco.bairro}" />
+
+							<p:outputLabel value="Cidade:" />
+							<h:outputText value="#{proprietario.endereco.cidade}" />
+
+							<p:outputLabel value="Cep:" />
+							<h:outputText value="#{proprietario.endereco.cep}" />
+
+						</p:panelGrid>
+					</p:rowExpansion>
+				</p:dataTable>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

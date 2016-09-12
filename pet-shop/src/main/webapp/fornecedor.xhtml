@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<p:panel header="Cadastro Fornecedor" id="page-cadastro-fornecedor">
+			<h:form>
+				<p:messages globalOnly="true" showDetail="true" showSummary="false"
+					closable="true" showIcon="true" />
+
+				<div class="ui-fluid">
+					<h:panelGrid columns="3" cellpadding="4"
+						styleClass="ui-panelgrid-blank">
+
+						<p:outputLabel value="CNPJ:" for="cnpj"></p:outputLabel>
+						<p:inputMask mask="99.999.999/9999-99"
+							value="#{fornecedorBean.fornecedor.cnpj}" id="cnpj"
+							required="true" requiredMessage="Campo Obrigatorio!"
+							converterMessage="Falha ao converter CNPJ">
+							<f:converter converterId="cnpjConverter" />
+							<f:validator validatorId="cnpjValidator" />
+						</p:inputMask>
+						<p:message for="cnpj" />
+
+						<p:outputLabel value="Nome da Empresa:" for="name_fan" />
+						<p:inputText id="name_fan"
+							value="#{fornecedorBean.fornecedor.name_fan}" required="true"
+							requiredMessage="Campo Obrigatório" title="*Campo Obrigatório" />
+						<p:message for="name_fan" />
+
+						<p:outputLabel value="Razão Social:" for="rsocial">
+							<p:tooltip id="toolTipFocus" for="rsocial" showEvent="focus"
+								hideEvent="blur" />
+						</p:outputLabel>
+						<p:inputText id="rsocial"
+							value="#{fornecedorBean.fornecedor.rsocial}"
+							title="*Campo Obrigatório" required="true"
+							requiredMessage="Campo Obrigatório" />
+						<p:message for="rsocial" />
+
+					</h:panelGrid>
+				</div>
+
+				<br />
+				<p:separator />
+				<div align="left">
+					<h:outputText value="CONTATO" />
+				</div>
+				<p:separator />
+				<br />
+
+				<div class="ui-fluid">
+					<h:panelGrid columns="3" cellpadding="4"
+						styleClass="ui-panelgrid-blank">
+
+						<p:outputLabel value="Email Principal:" for="email_pri" />
+						<p:inputText id="email_pri"
+							value="#{fornecedorBean.fornecedor.email_pri}" required="true"
+							requiredMessage="Email: *Campo Obrigatório" maxlength="45">
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
+						<p:message for="email_pri" />
+
+						<p:outputLabel value="Email Opcional:" for="email_op" />
+						<p:inputText id="email_op"
+							value="#{fornecedorBean.fornecedor.email_op}" maxlength="45">
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
+						<p:message for="email_op" />
+
+						<p:outputLabel value="Telefone Principal:" for="phone_pri" />
+						<p:inputMask id="phone_pri" mask="(99)99999999?9" required="true"
+							value="#{fornecedorBean.fornecedor.phone_pri}"
+							requiredMessage="Campo Obrigatório" />
+						<p:message for="phone_pri" />
+
+						<p:outputLabel value="Telefone Opcional:" for="phone_op" />
+						<p:inputMask id="phone_op"
+							value="#{fornecedorBean.fornecedor.phone_op}"
+							mask="(99)99999999?9" />
+						<p:message for="phone_op" />
+
+					</h:panelGrid>
+				</div>
+
+				<br />
+				<p:separator />
+				<div align="left">
+					<h:outputText value="ENDEREÇO" />
+				</div>
+				<p:separator />
+				<br />
+
+				<div class="ui-fluid">
+					<h:panelGrid columns="6" cellpadding="4"
+						styleClass="ui-panelgrid-blank">
+
+						<p:outputLabel value="Rua" for="rua" />
+						<p:inputText id="rua" value="#{fornecedorBean.endereco.rua}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="rua" />
+
+						<p:outputLabel value="Bairro: " for="bairro" />
+						<p:inputText id="bairro" value="#{fornecedorBean.endereco.bairro}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="bairro" />
+
+						<p:outputLabel value="Cidade: " for="cidade" />
+						<p:inputText id="cidade" value="#{fornecedorBean.endereco.cidade}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="cidade" />
+
+						<p:outputLabel value="Cep:" for="cep" />
+						<p:inputMask mask="99999999" id="cep"
+							value="#{fornecedorBean.endereco.cep}" required="true"
+							requiredMessage="Campo Obrigatório" />
+						<p:message for="cep" />
+
+					</h:panelGrid>
+				</div>
+
+				<br />
+				<br />
+				<p:separator />
+				<br />
+
+				<div align="left">
+					<p:commandButton value="Salvar" action="#{fornecedorBean.salvar}"
+						update="page-cadastro-fornecedor" />
+
+					<p:commandButton value="Cancelar" immediate="true"
+						resetValues="true" action="#{fornecedorBean.cancelar}"
+						update="page-cadastro-fornecedor" />
+				</div>
+
+			</h:form>
+			<br />
+			<br />
+
+			<p:dataTable value="#{fornecedorBean.fornecedores}" var="fornecedor">
+
+				<p:column headerText="Empresa">
+					<h:outputText value="#{fornecedor.name_fan}" />
+				</p:column>
+
+				<p:column headerText="FORNECEDOR CNPJ">
+					<h:outputText value="#{fornecedor.cnpj}">
+						<f:converter converterId="cnpjConverter" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Ações">
+					<h:form style="float:left">
+						<p:commandButton value="Alterar" style="float:left"
+							action="#{fornecedorBean.alterar(fornecedor)}"
+							update="page-cadastro-fornecedor" />
+					</h:form>
+
+					<h:form style="float:left">
+						<p:commandButton value="Excluir" style="float:left"
+							action="#{fornecedorBean.excluir(fornecedor)}"
+							update="page-cadastro-fornecedor" />
+					</h:form>
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

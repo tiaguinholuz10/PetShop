@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>pet-shop</artifactId>
+	<packaging>war</packaging>
+	<name>pet-shop Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>br.com.tt</groupId>
+			<artifactId>util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>pet-shop</finalName>
+	</build>
+
+	<parent>
+		<groupId>br.com.tt</groupId>
+		<artifactId>super-pom</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../super-pom</relativePath>
+	</parent>
+
+</project>
