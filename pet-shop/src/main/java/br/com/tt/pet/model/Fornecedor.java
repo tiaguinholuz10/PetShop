@@ -108,9 +108,8 @@ public class Fornecedor {
 	public void setEmail_op(String email_op) {
 		this.email_op = email_op;
 	}
-
-	public Endereco getEndereco(Endereco endereco) {
-
+	
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
