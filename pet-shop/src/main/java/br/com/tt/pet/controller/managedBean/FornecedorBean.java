@@ -85,7 +85,7 @@ public class FornecedorBean {
 
 		for (Fornecedor fornecedor : fornecedores) {
 			System.out.println("Lista " + fornecedor.getRsocial() + " | " + fornecedor.getCnpj() + " | "
-					+ fornecedor.getName_fan() + " | "+" Endereço-> " + fornecedor.getEndereco());
+					+ fornecedor.getName_fan() + " | " + " Endereço: " + fornecedor.getEndereco());
 		}
 		return fornecedores;
 	}
