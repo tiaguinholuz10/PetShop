@@ -107,5 +107,24 @@ public class Endereco {
 	public void setFornecedor_end(Fornecedor fornecedor_end) {
 		this.fornecedor_end = fornecedor_end;
 	}
+	
+	@Override
+	public String toString() {
+
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append("id: ");
+		stringBuffer.append(this.id);
+		stringBuffer.append(" | Rua: ");
+		stringBuffer.append(this.rua);
+		stringBuffer.append(" | Bairro: ");
+		stringBuffer.append(this.bairro);
+		stringBuffer.append(" | Cidade: ");
+		stringBuffer.append(this.cidade);
+		stringBuffer.append(" | Cep: ");
+		stringBuffer.append(this.cep);
+
+		return stringBuffer.toString();
+
+	}
 
 }
