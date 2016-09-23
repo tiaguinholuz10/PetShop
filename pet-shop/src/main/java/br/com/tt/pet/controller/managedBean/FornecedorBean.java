@@ -66,6 +66,7 @@ public class FornecedorBean {
 	public void alterar(Fornecedor fornecedor) {
 
 		this.fornecedor = fornecedor;
+		this.endereco = fornecedor.getEndereco();
 
 	}
 
@@ -84,7 +85,7 @@ public class FornecedorBean {
 
 		for (Fornecedor fornecedor : fornecedores) {
 			System.out.println("Lista " + fornecedor.getRsocial() + " | " + fornecedor.getCnpj() + " | "
-					+ fornecedor.getName_fan() + " | ");
+					+ fornecedor.getName_fan() + " | "+" Endereço-> " + fornecedor.getEndereco());
 		}
 		return fornecedores;
 	}
