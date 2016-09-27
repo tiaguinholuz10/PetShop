@@ -39,19 +39,6 @@ public class Endereco {
 	@JoinColumn(name = "id_fornecedor")
 	private Fornecedor fornecedor_end;
 
-	public Endereco() {
-		super();
-	}
-
-	public Endereco(String rua, String bairro, String cidade, String cep) {
-
-		this.rua = rua;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.cep = cep;
-
-	}
-
 	public Long getId() {
 		return id;
 	}
